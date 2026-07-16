@@ -1,0 +1,14 @@
+# Render Blueprint configuration for Zim Rigs Static Site
+services:
+  - type: web
+    name: zim-rigs
+    runtime: static
+    buildCommand: npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_SUPABASE_URL
+        sync: false
+        description: "The API endpoint URL for your Supabase project."
+      - key: VITE_SUPABASE_ANON_KEY
+        sync: false
+        description: "The public anonymous API key for your Supabase project."
