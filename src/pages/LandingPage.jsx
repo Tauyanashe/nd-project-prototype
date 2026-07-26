@@ -117,14 +117,14 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div style={{ background: '#0b0f19', color: '#f3f4f6', fontFamily: "'Plus Jakarta Sans', sans-serif", overflowX: 'hidden' }}>
+    <div style={{ background: 'var(--bg-main)', color: 'var(--text-main)', fontFamily: "'Plus Jakarta Sans', sans-serif", transition: 'background-color 0.3s ease, color 0.3s ease', overflowX: 'hidden' }}>
 
       {/* ── NAV ───────────────────────────────────────────────────────────── */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        background: scrolled ? 'rgba(11, 15, 25, 0.95)' : 'transparent',
+        background: scrolled ? 'var(--bg-header)' : 'transparent',
         backdropFilter: scrolled ? 'blur(12px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
+        borderBottom: scrolled ? '1px solid var(--border-color)' : 'none',
         transition: 'all 0.3s ease',
         padding: '1.25rem 2rem',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center'
@@ -136,15 +136,15 @@ export default function LandingPage() {
 
         {/* Desktop nav links */}
         <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }} className="desktop-nav">
-          <a href="#equipment" style={{ color: '#9ca3af', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
+          <a href="#equipment" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
             onClick={e => { e.preventDefault(); document.getElementById('equipment')?.scrollIntoView({ behavior: 'smooth' }); }}>
             Equipment
           </a>
-          <a href="#how" style={{ color: '#9ca3af', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
+          <a href="#how" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
             onClick={e => { e.preventDefault(); document.getElementById('how')?.scrollIntoView({ behavior: 'smooth' }); }}>
             How It Works
           </a>
-          <a href="#testimonials" style={{ color: '#9ca3af', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
+          <a href="#testimonials" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.95rem', fontWeight: 500 }}
             onClick={e => { e.preventDefault(); document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' }); }}>
             Reviews
           </a>
@@ -162,7 +162,7 @@ export default function LandingPage() {
           {/* Mobile menu toggle */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{ background: 'none', border: 'none', color: '#fff', cursor: 'pointer', display: 'none' }}
+            style={{ background: 'none', border: 'none', color: 'var(--text-main)', cursor: 'pointer', display: 'none' }}
             className="mobile-menu-btn"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -174,7 +174,8 @@ export default function LandingPage() {
       {mobileMenuOpen && (
         <div style={{
           position: 'fixed', top: '70px', left: 0, right: 0, zIndex: 99,
-          background: '#0d1220', borderBottom: '1px solid rgba(255,255,255,0.06)',
+          background: 'var(--bg-card)', borderBottom: '1px solid var(--border-color)',
+          backdropFilter: 'blur(16px)',
           padding: '1.5rem 2rem', display: 'flex', flexDirection: 'column', gap: '1.25rem'
         }}>
           <button onClick={() => navigate('/login')} className="btn btn-secondary" style={{ width: '100%' }}>Sign In</button>
@@ -214,7 +215,7 @@ export default function LandingPage() {
         <div style={{
           position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none',
           background: `
-            linear-gradient(to bottom, rgba(11,15,25,0.75) 0%, rgba(11,15,25,0.55) 40%, rgba(11,15,25,0.70) 70%, #0b0f19 100%),
+            linear-gradient(to bottom, rgba(11,15,25,0.75) 0%, rgba(11,15,25,0.55) 40%, rgba(11,15,25,0.70) 70%, var(--bg-main) 100%),
             linear-gradient(to right, rgba(11,15,25,0.6) 0%, transparent 50%, rgba(11,15,25,0.6) 100%)
           `
         }} />
@@ -301,19 +302,19 @@ export default function LandingPage() {
 
       {/* ── STATS BAR ─────────────────────────────────────────────────────── */}
       <section style={{
-        background: 'rgba(255,255,255,0.02)',
-        borderTop: '1px solid rgba(255,255,255,0.05)',
-        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        background: 'var(--glass-bg)',
+        borderTop: '1px solid var(--border-color)',
+        borderBottom: '1px solid var(--border-color)',
         padding: '2.5rem 2rem'
       }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2rem', textAlign: 'center' }}>
           {loading ? (
-            <div style={{ gridColumn: '1 / -1', color: 'rgba(255,255,255,0.4)', fontSize: '0.95rem', fontStyle: 'italic' }}>Loading active platform metrics...</div>
+            <div style={{ gridColumn: '1 / -1', color: 'var(--text-muted)', fontSize: '0.95rem', fontStyle: 'italic' }}>Loading active platform metrics...</div>
           ) : (
             stats.map(s => (
               <div key={s.label}>
                 <p style={{ fontFamily: "'Outfit', sans-serif", fontSize: '2.8rem', fontWeight: 800, color: '#f59e0b', lineHeight: 1 }}>{s.value}</p>
-                <p style={{ color: '#6b7280', fontSize: '0.9rem', marginTop: '0.35rem' }}>{s.label}</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', marginTop: '0.35rem' }}>{s.label}</p>
               </div>
             ))
           )}
@@ -327,7 +328,7 @@ export default function LandingPage() {
           <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5vw, 3rem)', fontWeight: 800, letterSpacing: '-0.02em' }}>
             World-Class Mining Equipment
           </h2>
-          <p style={{ color: '#9ca3af', marginTop: '0.75rem', fontSize: '1.05rem' }}>
+          <p style={{ color: 'var(--text-muted)', marginTop: '0.75rem', fontSize: '1.05rem' }}>
             Browse a growing inventory of verified, maintained heavy machinery from trusted Zimbabwean suppliers.
           </p>
         </div>
@@ -338,14 +339,14 @@ export default function LandingPage() {
               gridColumn: '1 / -1',
               textAlign: 'center',
               padding: '4rem 2rem',
-              background: 'rgba(255,255,255,0.01)',
+              background: 'var(--glass-bg)',
               borderRadius: '12px',
-              border: '1px solid rgba(255,255,255,0.04)'
+              border: '1px solid var(--border-color)'
             }}>
               <div className="badge badge-warning" style={{ padding: '0.75rem 1.5rem', fontSize: '1rem', animation: 'pulse-glow 2s infinite', marginBottom: '0.5rem' }}>
                 Connecting to Fleet Database...
               </div>
-              <p style={{ color: '#9ca3af', fontSize: '0.95rem' }}>Fetching live available mining equipment...</p>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Fetching live available mining equipment...</p>
             </div>
           ) : showcaseEquipment.length > 0 ? (
             showcaseEquipment.map((eq, i) => (
@@ -374,9 +375,9 @@ export default function LandingPage() {
                 </div>
                 <div style={{ padding: '1.35rem' }}>
                   <span style={{ color: '#f59e0b', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em' }}>{eq.category}</span>
-                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.15rem', fontWeight: 700, margin: '0.25rem 0 0.75rem', color: '#fff' }}>{eq.name}</h3>
+                  <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.15rem', fontWeight: 700, margin: '0.25rem 0 0.75rem', color: 'var(--text-header)' }}>{eq.name}</h3>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: '#9ca3af', fontSize: '0.875rem' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', color: 'var(--text-muted)', fontSize: '0.875rem' }}>
                       <MapPin size={13} color="#f59e0b" /> {eq.location}
                     </span>
                     <span style={{ color: '#f59e0b', fontWeight: 800, fontSize: '1.15rem', fontFamily: "'Outfit', sans-serif" }}>${eq.daily_rate}/day</span>
@@ -389,13 +390,13 @@ export default function LandingPage() {
               gridColumn: '1 / -1',
               textAlign: 'center',
               padding: '4rem 2rem',
-              background: 'rgba(255,255,255,0.02)',
+              background: 'var(--glass-bg)',
               borderRadius: '12px',
-              border: '1px dashed rgba(255,255,255,0.08)'
+              border: '1px dashed var(--border-color)'
             }}>
               <HardHat size={44} color="#f59e0b" style={{ marginBottom: '1.25rem', opacity: 0.8 }} />
-              <h4 style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: "'Outfit', sans-serif" }}>No Heavy Equipment Listed Yet</h4>
-              <p style={{ color: '#9ca3af', fontSize: '0.95rem', maxWidth: '440px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
+              <h4 style={{ color: 'var(--text-header)', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: "'Outfit', sans-serif" }}>No Heavy Equipment Listed Yet</h4>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '440px', margin: '0 auto 1.5rem', lineHeight: 1.6 }}>
                 Be the first supplier to list your excavator, drill rig, or dump truck. Sign up to publish your fleet!
               </p>
               <button onClick={() => navigate('/register?role=supplier')} className="btn btn-primary" style={{ padding: '0.75rem 1.5rem', fontSize: '0.9rem' }}>
@@ -415,9 +416,9 @@ export default function LandingPage() {
       {/* ── HOW IT WORKS ──────────────────────────────────────────────────── */}
       <section id="how" style={{
         padding: '6rem 2rem',
-        background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(245,158,11,0.04) 0%, transparent 70%), rgba(255,255,255,0.01)',
-        borderTop: '1px solid rgba(255,255,255,0.04)',
-        borderBottom: '1px solid rgba(255,255,255,0.04)'
+        background: 'radial-gradient(ellipse 60% 50% at 50% 50%, rgba(245,158,11,0.04) 0%, transparent 70%), var(--glass-bg)',
+        borderTop: '1px solid var(--border-color)',
+        borderBottom: '1px solid var(--border-color)'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -447,8 +448,8 @@ export default function LandingPage() {
                   color: '#f59e0b', fontWeight: 800, fontFamily: "'Outfit', sans-serif",
                   marginBottom: '1rem'
                 }}>{s.step}</div>
-                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.6rem', color: '#fff' }}>{s.title}</h3>
-                <p style={{ color: '#9ca3af', fontSize: '0.9rem', lineHeight: 1.6 }}>{s.desc}</p>
+                <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.15rem', fontWeight: 700, marginBottom: '0.6rem', color: 'var(--text-header)' }}>{s.title}</h3>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.6 }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -472,8 +473,8 @@ export default function LandingPage() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: '#f59e0b'
               }}>{f.icon}</div>
-              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.1rem', fontWeight: 700, color: '#fff' }}>{f.title}</h3>
-              <p style={{ color: '#9ca3af', fontSize: '0.9rem', lineHeight: 1.65 }}>{f.desc}</p>
+              <h3 style={{ fontFamily: "'Outfit', sans-serif", fontSize: '1.1rem', fontWeight: 700, color: 'var(--text-header)' }}>{f.title}</h3>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem', lineHeight: 1.65 }}>{f.desc}</p>
             </div>
           ))}
         </div>
@@ -482,8 +483,8 @@ export default function LandingPage() {
       {/* ── TESTIMONIALS ──────────────────────────────────────────────────── */}
       <section id="testimonials" style={{
         padding: '6rem 2rem',
-        background: 'rgba(255,255,255,0.01)',
-        borderTop: '1px solid rgba(255,255,255,0.04)'
+        background: 'var(--glass-bg)',
+        borderTop: '1px solid var(--border-color)'
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
@@ -495,7 +496,7 @@ export default function LandingPage() {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
             {loading ? (
               <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem' }}>
-                <p style={{ color: '#9ca3af', fontSize: '0.95rem', fontStyle: 'italic' }}>Loading customer testimonials...</p>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', fontStyle: 'italic' }}>Loading customer testimonials...</p>
               </div>
             ) : testimonials.length > 0 ? (
               testimonials.map((t, i) => (
@@ -505,7 +506,7 @@ export default function LandingPage() {
                       <Star key={si} size={16} fill="#f59e0b" color="#f59e0b" />
                     ))}
                   </div>
-                  <p style={{ color: '#d1d5db', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
+                  <p style={{ color: 'var(--text-main)', fontSize: '0.95rem', lineHeight: 1.7, marginBottom: '1.5rem', fontStyle: 'italic' }}>
                     "{t.text}"
                   </p>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
@@ -516,8 +517,8 @@ export default function LandingPage() {
                       fontWeight: 700, color: '#f59e0b', fontFamily: "'Outfit', sans-serif"
                     }}>{t.name ? t.name.charAt(0) : 'M'}</div>
                     <div>
-                      <p style={{ fontWeight: 700, color: '#fff', fontSize: '0.9rem' }}>{t.name}</p>
-                      <p style={{ color: '#9ca3af', fontSize: '0.8rem' }}>{t.company} · {t.location}</p>
+                      <p style={{ fontWeight: 700, color: 'var(--text-header)', fontSize: '0.9rem' }}>{t.name}</p>
+                      <p style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>{t.company} · {t.location}</p>
                     </div>
                   </div>
                 </div>
@@ -527,13 +528,13 @@ export default function LandingPage() {
                 gridColumn: '1 / -1',
                 textAlign: 'center',
                 padding: '4rem 2rem',
-                background: 'rgba(255,255,255,0.02)',
+                background: 'var(--glass-bg)',
                 borderRadius: '12px',
-                border: '1px dashed rgba(255,255,255,0.08)'
+                border: '1px dashed var(--border-color)'
               }}>
                 <MessageSquare size={44} color="#f59e0b" style={{ marginBottom: '1.25rem', opacity: 0.8 }} />
-                <h4 style={{ color: '#fff', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: "'Outfit', sans-serif" }}>No Testimonials Yet</h4>
-                <p style={{ color: '#9ca3af', fontSize: '0.95rem', maxWidth: '440px', margin: '0 auto', lineHeight: 1.6 }}>
+                <h4 style={{ color: 'var(--text-header)', fontSize: '1.25rem', fontWeight: 700, marginBottom: '0.5rem', fontFamily: "'Outfit', sans-serif" }}>No Testimonials Yet</h4>
+                <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem', maxWidth: '440px', margin: '0 auto', lineHeight: 1.6 }}>
                   Once operators rent equipment and leave feedback ratings, their testimonials will appear here!
                 </p>
               </div>
@@ -552,7 +553,7 @@ export default function LandingPage() {
           <h2 style={{ fontFamily: "'Outfit', sans-serif", fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 900, letterSpacing: '-0.03em', marginBottom: '1rem' }}>
             Ready to Hire Your Next Rig?
           </h2>
-          <p style={{ color: '#9ca3af', fontSize: '1.05rem', marginBottom: '2.5rem', lineHeight: 1.7 }}>
+          <p style={{ color: 'var(--text-muted)', fontSize: '1.05rem', marginBottom: '2.5rem', lineHeight: 1.7 }}>
             Join hundreds of mining companies and equipment suppliers already using Zim Rigs to power Zimbabwe's mining industry.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -576,7 +577,7 @@ export default function LandingPage() {
 
       {/* ── FOOTER ────────────────────────────────────────────────────────── */}
       <footer style={{
-        borderTop: '1px solid rgba(255,255,255,0.06)',
+        borderTop: '1px solid var(--border-color)',
         padding: '2rem',
         display: 'flex',
         justifyContent: 'space-between',
@@ -590,14 +591,14 @@ export default function LandingPage() {
           <HardHat size={20} color="#f59e0b" />
           ZIM<span style={{ color: '#f59e0b' }}>RIGS</span>
         </div>
-        <p style={{ color: '#6b7280', fontSize: '0.85rem' }}>
+        <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem' }}>
           © {new Date().getFullYear()} Zim Rigs · Zimbabwe Mining Equipment Portal. All rights reserved.
         </p>
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           {['Privacy', 'Terms', 'Contact'].map(link => (
-            <span key={link} style={{ color: '#6b7280', fontSize: '0.85rem', cursor: 'pointer', transition: 'color 0.2s' }}
+            <span key={link} style={{ color: 'var(--text-muted)', fontSize: '0.85rem', cursor: 'pointer', transition: 'color 0.2s' }}
               onMouseEnter={e => e.currentTarget.style.color = '#f59e0b'}
-              onMouseLeave={e => e.currentTarget.style.color = '#6b7280'}>
+              onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>
               {link}
             </span>
           ))}
