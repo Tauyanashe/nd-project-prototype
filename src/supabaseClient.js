@@ -7,12 +7,97 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 // Mock database seed data (pre-loaded for offline / demo purposes)
 // ──────────────────────────────────────────────────────────────────────────────
 const defaultMockData = {
-  profiles: [],
-  equipment: [],
-  bookings: [],
+  profiles: [
+    {
+      id: 'usr-admin1',
+      email: 'admin@zimrigs.co.zw',
+      full_name: 'Platform Administrator',
+      user_type: 'admin',
+      company_name: 'Zim Rigs HQ',
+      phone: '+263 77 111 1111',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'usr-supplier1',
+      email: 'supplier@zimrigs.co.zw',
+      full_name: 'Tinashe Equipment Supplier',
+      user_type: 'supplier',
+      company_name: 'Zim Rigs Supplier Co.',
+      phone: '+263 77 222 2222',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'usr-customer1',
+      email: 'customer@zimrigs.co.zw',
+      full_name: 'Chipo Mining Contractor',
+      user_type: 'customer',
+      company_name: 'Harare Gold Mines',
+      phone: '+263 77 333 3333',
+      created_at: new Date().toISOString()
+    }
+  ],
+  equipment: [
+    {
+      id: 'eq-1',
+      supplier_id: 'usr-supplier1',
+      name: 'CAT 320 Excavator',
+      category: 'Excavators',
+      description: 'Reliable and fuel-efficient 20-ton tracked excavator, suitable for bulk earthworks and trenching.',
+      daily_rate: 650.00,
+      location: 'Harare',
+      image_url: 'https://images.unsplash.com/photo-1579294800821-2e41879cd75a?auto=format&fit=crop&q=80&w=800',
+      status: 'available',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'eq-2',
+      supplier_id: 'usr-supplier1',
+      name: 'Sandvik Drill Rig',
+      category: 'Drill Rigs',
+      description: 'High-performance rock drill rig for open-pit blast hole drilling.',
+      daily_rate: 1200.00,
+      location: 'Bulawayo',
+      image_url: 'https://images.unsplash.com/photo-1541625602330-2277a4c46182?auto=format&fit=crop&q=80&w=800',
+      status: 'available',
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 'eq-3',
+      supplier_id: 'usr-supplier1',
+      name: '150kVA Perkins Generator',
+      category: 'Generators',
+      description: 'Silent canopy diesel generator, ideal for powering mining site camps and operations.',
+      daily_rate: 250.00,
+      location: 'Gweru',
+      image_url: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800',
+      status: 'available',
+      created_at: new Date().toISOString()
+    }
+  ],
+  bookings: [
+    {
+      id: 'bk-1',
+      customer_id: 'usr-customer1',
+      equipment_id: 'eq-1',
+      start_date: '2026-08-01',
+      end_date: '2026-08-05',
+      total_price: 2600.00,
+      status: 'pending',
+      created_at: new Date().toISOString()
+    }
+  ],
   chat_rooms: [],
   messages: [],
-  ratings: []
+  ratings: [
+    {
+      id: 'rt-1',
+      customer_id: 'usr-customer1',
+      equipment_id: 'eq-1',
+      rating: 5,
+      review: 'Outstanding machinery. Tinashe Supplier was extremely helpful with the transport logistics to Gweru.',
+      created_at: new Date().toISOString()
+    }
+  ]
 };
 
 // ──────────────────────────────────────────────────────────────────────────────

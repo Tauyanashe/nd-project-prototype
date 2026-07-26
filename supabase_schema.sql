@@ -159,3 +159,31 @@ CREATE TRIGGER on_auth_user_created
 
 -- Seed some mock equipment for preview/admin if desired (Supabase Editor only)
 -- Note: Replace supplier UUIDs with actual user IDs from your Auth table.
+
+-- 8. RATINGS TABLE
+CREATE TABLE IF NOT EXISTS public.ratings (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    customer_id UUID REFERENCES public.profiles(id) ON DELETE CASCADE NOT NULL,
+    equipment_id UUID REFERENCES public.equipment(id) ON DELETE CASCADE NOT NULL,
+    rating INTEGER CHECK (rating >= 1 AND rating <= 5) NOT NULL,
+    review TEXT,
+    created_at TIMESTAMPTZ DEFAULT now() NOT NULL,
+    CONSTRAINT unique_customer_equipment_rating UNIQUE (customer_id, equipment_id)
+);
+
+-- ENABLE ROW LEVEL SECURITY FOR RATINGS
+ALTER TABLE public.ratings ENABLE ROW LEVEL SECURITY;
+
+-- RATINGS POLICIES
+CREATE POLICY "Ratings are viewable by everyone" ON public.ratings
+    FOR SELECT USING (true);
+
+CREATE POLICY "Customers can insert their own ratings" ON public.ratings
+    FOR INSERT WITH CHECK (auth.uid() = customer_id);
+
+CREATE POLICY "Customers can update their own ratings" ON public.ratings
+    FOR UPDATE USING (auth.uid() = customer_id);
+
+CREATE POLICY "Customers can delete their own ratings" ON public.ratings
+    FOR DELETE USING (auth.uid() = customer_id);
+
