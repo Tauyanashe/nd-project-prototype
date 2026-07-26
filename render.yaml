@@ -4,7 +4,7 @@ services:
     name: zim-rigs
     runtime: static
     buildCommand: npm run build
-    publishDir: dist
+    staticPublishPath: ./dist
     envVars:
       - key: VITE_SUPABASE_URL
         sync: false
