@@ -43,7 +43,7 @@
 .light-theme {
   --bg-main: #f8fafc;
   --bg-card: rgba(255, 255, 255, 0.95);
-  --bg-sidebar: #0d1220; /* Keep sidebar dark for structural premium contrast */
+  --bg-sidebar: #ffffff;
   --bg-header: rgba(255, 255, 255, 0.85);
 
   --text-main: #0f172a;
@@ -159,6 +159,13 @@ h1, h2, h3, h4, h5, h6 {
   min-height: 100vh;
 }
 
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
 @media (max-width: 900px) {
   .dashboard-layout {
     grid-template-columns: 1fr;
@@ -176,6 +183,13 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 10;
 }
 
+.sidebar-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.5rem;
+}
+
 .sidebar-logo {
   display: flex;
   align-items: center;
@@ -184,11 +198,76 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.4rem;
   font-weight: 800;
   color: var(--primary);
-  margin-bottom: 2.5rem;
 }
 
 .sidebar-logo span {
-  color: #fff;
+  color: var(--text-header);
+}
+
+.sidebar-username {
+  color: var(--text-header);
+}
+
+/* Hide mobile elements on desktop */
+.sidebar-toggle-btn,
+.sidebar-close-btn,
+.sidebar-overlay {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 280px;
+    z-index: 1000;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: none;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
+  }
+
+  .sidebar-toggle-btn {
+    display: inline-flex;
+    background: none;
+    border: none;
+    color: var(--text-header);
+    cursor: pointer;
+    padding: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .sidebar-close-btn {
+    display: inline-flex;
+    background: none;
+    border: none;
+    color: var(--text-header);
+    cursor: pointer;
+    padding: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+  }
+
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+  }
 }
 
 .sidebar-menu {
@@ -212,7 +291,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sidebar-item:hover, .sidebar-item.active {
-  color: #ffffff;
+  color: var(--text-header);
   background-color: rgba(245, 158, 11, 0.1);
   box-shadow: inset 3px 0 0 var(--primary);
 }
@@ -270,10 +349,10 @@ h1, h2, h3, h4, h5, h6 {
 .form-input {
   width: 100%;
   padding: 0.8rem 1rem;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-main);
   font-family: inherit;
   font-size: 0.95rem;
   transition: all 0.2s ease;
@@ -282,15 +361,15 @@ h1, h2, h3, h4, h5, h6 {
 .form-input:focus {
   outline: none;
   border-color: var(--primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-card);
   box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.2);
 }
 
 /* Fix select dropdowns — force dark background & white text */
 select.form-input,
 select {
-  background-color: #111827;
-  color: #f3f4f6;
+  background-color: var(--bg-card);
+  color: var(--text-main);
   cursor: pointer;
   appearance: none;
   -webkit-appearance: none;
@@ -302,13 +381,17 @@ select {
 
 select.form-input option,
 select option {
-  background-color: #111827;
-  color: #f3f4f6;
+  background-color: var(--bg-card);
+  color: var(--text-main);
 }
 
 /* Date input styling */
 input[type="date"].form-input {
   color-scheme: dark;
+}
+
+.light-theme input[type="date"].form-input {
+  color-scheme: light;
 }
 
 /* Buttons */
@@ -463,7 +546,7 @@ input[type="date"].form-input {
 }
 
 .chat-list-item:hover, .chat-list-item.active {
-  background-color: rgba(255, 255, 255, 0.02);
+  background-color: var(--glass-bg);
 }
 
 .chat-avatar {
@@ -524,9 +607,9 @@ input[type="date"].form-input {
 
 .message-received {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--bg-message-received);
   border: 1px solid var(--glass-border);
-  color: #fff;
+  color: var(--text-message-received);
   border-bottom-left-radius: 2px;
 }
 
@@ -629,4 +712,13 @@ input[type="date"].form-input {
   font-weight: 700;
   font-family: var(--font-heading);
   color: #fff;
+}
+
+/* Light theme overrides for Register / Sign up Page */
+.light-theme .register-page .form-input {
+  color: #000000;
+}
+
+.light-theme .register-page .btn {
+  color: #000000;
 }

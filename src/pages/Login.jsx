@@ -44,7 +44,8 @@ export default function Login() {
       alignItems: 'center',
       justifyContent: 'center',
       minHeight: '100vh',
-      background: 'radial-gradient(circle at center, #111827 0%, #030712 100%)',
+      background: 'radial-gradient(circle at center, var(--bg-card) 0%, var(--bg-main) 100%)',
+      transition: 'background-color 0.3s ease',
       padding: '1.5rem',
       position: 'relative'
     }}>
